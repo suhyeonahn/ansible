@@ -1,0 +1,12 @@
+---
+# tasks file for nodejs
+
+- name: Installing node and npm
+  ansible.builtin.yum:
+    name: "{{ packages }}"
+    enablerepo: epel
+    state: installed
+  vars:
+    packages:
+    - nodejs
+    - npm
