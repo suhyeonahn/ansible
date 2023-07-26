@@ -12,8 +12,8 @@
 
 - name: Install OpenJDK
   become: yes
-  yum:
-    name: java-11-openjdk   # Replace '11' with the desired Java version if needed.
+  dnf:
+    name:  java-11-amazon-corretto-devel
     state: present
 
 - name: Add Jenkins repository
