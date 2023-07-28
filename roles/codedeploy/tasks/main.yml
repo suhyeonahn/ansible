@@ -1,5 +1,10 @@
 ---
 # tasks file for codedeploy
+- name: Install boto library
+  pip:
+    name: boto
+    state: present
+  
 - name: Installs and starts the AWS CodeDeploy Agent
   aws_codedeploy:
     enabled: yes
