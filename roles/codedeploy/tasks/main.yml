@@ -9,7 +9,6 @@
 #  aws_codedeploy:
 #    enabled: yes
 
----
 - name: Install AWS CodeDeploy agent prerequisites
   package:
     name: ruby
