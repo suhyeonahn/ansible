@@ -1,32 +1,13 @@
 ---
 # tasks file for codedeploy
-#- name: Install boto library
-#  pip:
-#    name: boto
-#    state: present
+- name: Install boto library
+  pip:
+    name: boto
+    state: present
   
-#- name: Installs and starts the AWS CodeDeploy Agent
-#  aws_codedeploy:
-#    enabled: yes
-
-- name: Install AWS CodeDeploy agent prerequisites
-  package:
-    name: ruby
-    state: present
-  become: yes
-
-- name: Download AWS CodeDeploy agent package
-  get_url:
-    url: "https://aws-codedeploy-us-west-2.s3.amazonaws.com/latest/codedeploy-agent.noarch.rpm"
-    dest: /tmp/codedeploy-agent.noarch.rpm
-    validate_certs: no
-  become: yes
-
-- name: Install AWS CodeDeploy agent
-  rpm:
-    name: /tmp/codedeploy-agent.noarch.rpm
-    state: present
-  become: yes
+- name: Installs and starts the AWS CodeDeploy Agent
+  aws_codedeploy:
+    enabled: yes
 
 - name: Start AWS CodeDeploy agent
   service:
