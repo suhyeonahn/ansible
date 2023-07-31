@@ -1,13 +1,22 @@
 ---
 # tasks file for codedeploy
-- name: Install boto library
-  pip:
-    name: boto
-    state: present
-  
-- name: Installs and starts the AWS CodeDeploy Agent
-  aws_codedeploy:
-    enabled: yes
+
+- name: Gather package facts
+  package_facts:
+    manager: auto
+
+- name: Install Code Deploy Agent
+  block:
+    - name: Fetch the CodeDeploy install script
+      get_url:
+        url: https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
+        dest: /tmp/codedeploy-install
+        mode: 0700
+
+    - name: Run the installation script
+      become: true
+      command: /tmp/codedeploy-install auto
+  when: "'codedeploy-agent' not in ansible_facts.packages"
 
 - name: Start AWS CodeDeploy agent
   service:
